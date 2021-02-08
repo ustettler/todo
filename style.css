@@ -82,6 +82,8 @@ h1 {
 	color: #fff;
 	font-size: 1.4rem;
 	width: 245px;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: 2rem;
 }
 
 .edit{
@@ -94,6 +96,7 @@ h1 {
 	margin: 0 0.5rem;
 	cursor: pointer;
 }
+
 
 .remove{
 	background: none;
