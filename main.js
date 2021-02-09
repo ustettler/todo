@@ -48,7 +48,6 @@ button.addEventListener('click', () => {
     //console.log("Eintrag : " + newText.innerHTML)
 
 
-
     //Input Feld Leeren nach dem Eintragen
     document.querySelector(".input").value = "";
 
@@ -70,14 +69,14 @@ button.addEventListener('click', () => {
 
 
     // Edit Button
-    let editButton = document.createElement("Button");
+    /* let editButton = document.createElement("Button");
     editButton.classList.add("edit");
     newItem.appendChild(editButton);
 
     let icon2 = document.createElement("i");
     icon2.classList.add("fa-edit");
     icon2.classList.add("far");
-    editButton.appendChild(icon2);
+    editButton.appendChild(icon2); */
 
 
     // Edit Funktion
@@ -86,14 +85,16 @@ button.addEventListener('click', () => {
         newItem.remove()
     })
 
-
+    //EDIT
+    let editable = newText.contentEditable
+    newText.contentEditable = "true"
+/*
     editButton.addEventListener('click', () =>{
-    console.log("EDIT")
+    console.log("EDIT") */
     // EDIT
-    let editInput = document.createElement("Input")
+  /*   let editInput = document.createElement("Input")
     editInput.classList.add("input")
     newItem.appendChild(editInput)
-    editInput.value = newText.innerHTML
+    editInput.value = newText.innerHTML */
     })
-});
 
