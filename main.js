@@ -8,6 +8,11 @@ let button = document.querySelector(".add");
 button.addEventListener('click', () => {
     console.log("ADD");
 
+    if (input.value == ""){
+        alert("Kein Text")
+        return
+    }
+
     //1. Variablen erstellen, 2. Stylen 3. Positionieren
 
 
@@ -35,12 +40,9 @@ button.addEventListener('click', () => {
     newText.classList.add("item_input")
 
     // Text hinein schreiben, wenn Input leer ist, newItem löschen
-    if (input.value == ""){
-        //alert("Feld Leer!!")
-        newItem.remove()
-    } else {
-        newText.innerHTML = input.value;
-    }
+
+    newText.innerHTML = input.value;
+
 
     // Item Positionieren
     newItem.appendChild(newText);
@@ -49,7 +51,7 @@ button.addEventListener('click', () => {
 
 
     //Input Feld Leeren nach dem Eintragen
-    document.querySelector(".input").value = "";
+    input.value = "";
 
 
 
@@ -69,14 +71,14 @@ button.addEventListener('click', () => {
 
 
     // Edit Button
-    /* let editButton = document.createElement("Button");
+    let editButton = document.createElement("Button");
     editButton.classList.add("edit");
     newItem.appendChild(editButton);
 
     let icon2 = document.createElement("i");
     icon2.classList.add("fa-edit");
     icon2.classList.add("far");
-    editButton.appendChild(icon2); */
+    editButton.appendChild(icon2);
 
 
     // Edit Funktion
@@ -87,14 +89,11 @@ button.addEventListener('click', () => {
 
     //EDIT
     let editable = newText.contentEditable
-    newText.contentEditable = "true"
-/*
-    editButton.addEventListener('click', () =>{
-    console.log("EDIT") */
-    // EDIT
-  /*   let editInput = document.createElement("Input")
-    editInput.classList.add("input")
-    newItem.appendChild(editInput)
-    editInput.value = newText.innerHTML */
-    })
 
+
+    editButton.addEventListener('click', () =>{
+    console.log("EDIT")
+    // EDIT
+    newText.contentEditable = "true"
+    })
+})
