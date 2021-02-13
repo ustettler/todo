@@ -8,6 +8,7 @@ let button = document.querySelector(".add");
 button.addEventListener('click', () => {
     console.log("ADD");
 
+    // Wenn input leer, nichts machen
     if (input.value == ""){
         alert("Kein Text")
         return
