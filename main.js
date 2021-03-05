@@ -3,13 +3,25 @@ console.log("Todo")
 let input = document.querySelector(".input");
 let todoList = document.querySelector(".container");
 let button = document.querySelector(".add");
+let storage = [];
+storage = JSON.parse(localStorage.getItem("todo"))
+console.log("Storeage:" + storage)
 
+// forschleife über storage für jedes element additem
 
 button.addEventListener('click', () => {
     console.log("ADD");
 
-    // Wenn input leer, nichts machen
-    if (input.value == ""){
+    addItem(input.value)
+
+    //Input Feld Leeren nach dem Eintragen
+    input.value = "";
+
+})
+
+    function addItem(text){
+         // Wenn input leer, nichts machen
+    if (text == ""){
         alert("Kein Text")
         return
     }
@@ -42,7 +54,7 @@ button.addEventListener('click', () => {
 
     // Text hinein schreiben, wenn Input leer ist, newItem löschen
 
-    newText.innerHTML = input.value;
+    newText.innerHTML = text;
 
 
     // Item Positionieren
@@ -50,13 +62,10 @@ button.addEventListener('click', () => {
 
     //console.log("Eintrag : " + newText.innerHTML)
 
-
-    //Input Feld Leeren nach dem Eintragen
-    input.value = "";
-
-
-
-
+    // input in storage pushen (array)
+    storage.push(text)
+    console.log("storage: " + JSON.stringify(storage))
+    localStorage.setItem("todo", JSON.stringify(storage));
 
     // BUTTON ERSTELLEN
 
@@ -82,7 +91,7 @@ button.addEventListener('click', () => {
     editButton.appendChild(icon2);
 
 
-    // Edit Funktion
+    // Delete Funktion
     removeButton.addEventListener('click', () =>{
         console.log("Delete")
         newItem.remove()
@@ -97,4 +106,5 @@ button.addEventListener('click', () => {
     // EDIT
     newText.contentEditable = "true"
     })
-})
+
+    }
