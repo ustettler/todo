@@ -1,110 +1,99 @@
-console.log("Todo")
+console.log("Todo");
 
 let input = document.querySelector(".input");
 let todoList = document.querySelector(".container");
 let button = document.querySelector(".add");
 let storage = [];
-storage = JSON.parse(localStorage.getItem("todo"))
-console.log("Storeage:" + storage)
+storage = JSON.parse(localStorage.getItem("todo"));
+console.log("Storeage:" + storage);
 
 // forschleife über storage für jedes element additem
 
-button.addEventListener('click', () => {
-    console.log("ADD");
+button.addEventListener("click", () => {
+	console.log("ADD");
 
-    addItem(input.value)
+	addItem(input.value);
 
-    //Input Feld Leeren nach dem Eintragen
-    input.value = "";
+	//Input Feld Leeren nach dem Eintragen
+	input.value = "";
+});
 
-})
+function addItem(text) {
+	// Wenn input leer, nichts machen
+	if (text == "") {
+		alert("Kein Text");
+		return;
+	}
 
-    function addItem(text){
-         // Wenn input leer, nichts machen
-    if (text == ""){
-        alert("Kein Text")
-        return
-    }
+	//1. Variablen erstellen, 2. Stylen 3. Positionieren
 
-    //1. Variablen erstellen, 2. Stylen 3. Positionieren
+	//BOX FÜR EINTRAG
 
+	// Variable , Element erstellen (DIV)
+	let newItem = document.createElement("Div");
 
+	// Stylen: Klasse dafür zuweisen (siehe CSS)
+	newItem.classList.add("item");
 
-    //BOX FÜR EINTRAG
+	// Item Positionieren...das Kindelement von todolist
+	todoList.appendChild(newItem);
 
-    // Variable , Element erstellen (DIV)
-    let newItem = document.createElement("Div")
+	// TEXT / EINFÜGEN
 
-    // Stylen: Klasse dafür zuweisen (siehe CSS)
-    newItem.classList.add("item")
+	// Variable, Element erstellen
+	let newText = document.createElement("Div");
 
-    // Item Positionieren...das Kindelement von todolist
-    todoList.appendChild(newItem)
+	// Klasse dafür zuweisen (siehe CSS)
+	newText.classList.add("item_input");
 
+	// Text hinein schreiben, wenn Input leer ist, newItem löschen
 
+	newText.innerHTML = text;
 
+	// Item Positionieren
+	newItem.appendChild(newText);
 
-    // TEXT / EINFÜGEN
+	//console.log("Eintrag : " + newText.innerHTML)
 
-    // Variable, Element erstellen
-    let newText = document.createElement("Div")
+	// input in storage pushen (array)
+	storage.push(text);
+	console.log("storage: " + JSON.stringify(storage));
+	localStorage.setItem("todo", JSON.stringify(storage));
 
-    // Klasse dafür zuweisen (siehe CSS)
-    newText.classList.add("item_input")
+	// BUTTON ERSTELLEN
 
-    // Text hinein schreiben, wenn Input leer ist, newItem löschen
+	// Remove Button
+	let removeButton = document.createElement("Button");
+	removeButton.classList.add("remove");
+	newItem.appendChild(removeButton);
 
-    newText.innerHTML = text;
+	let icon = document.createElement("i");
+	icon.classList.add("fa-trash-alt");
+	icon.classList.add("fa");
+	removeButton.appendChild(icon);
 
+	// Edit Button
+	let editButton = document.createElement("Button");
+	editButton.classList.add("edit");
+	newItem.appendChild(editButton);
 
-    // Item Positionieren
-    newItem.appendChild(newText);
+	let icon2 = document.createElement("i");
+	icon2.classList.add("fa-edit");
+	icon2.classList.add("far");
+	editButton.appendChild(icon2);
 
-    //console.log("Eintrag : " + newText.innerHTML)
+	// Delete Funktion
+	removeButton.addEventListener("click", () => {
+		console.log("Delete");
+		newItem.remove();
+	});
 
-    // input in storage pushen (array)
-    storage.push(text)
-    console.log("storage: " + JSON.stringify(storage))
-    localStorage.setItem("todo", JSON.stringify(storage));
+	//EDIT
+	let editable = newText.contentEditable;
 
-    // BUTTON ERSTELLEN
-
-    // Remove Button
-    let removeButton = document.createElement("Button");
-    removeButton.classList.add("remove");
-    newItem.appendChild(removeButton);
-
-    let icon = document.createElement("i");
-    icon.classList.add("fa-trash-alt");
-    icon.classList.add("fa");
-    removeButton.appendChild(icon);
-
-
-    // Edit Button
-    let editButton = document.createElement("Button");
-    editButton.classList.add("edit");
-    newItem.appendChild(editButton);
-
-    let icon2 = document.createElement("i");
-    icon2.classList.add("fa-edit");
-    icon2.classList.add("far");
-    editButton.appendChild(icon2);
-
-
-    // Delete Funktion
-    removeButton.addEventListener('click', () =>{
-        console.log("Delete")
-        newItem.remove()
-    })
-
-    //EDIT
-    let editable = newText.contentEditable
-
-
-    editButton.addEventListener('click', () =>{
-    console.log("EDIT")
-    // EDIT
-    newText.contentEditable = "true"
-    })
-
-    }
+	editButton.addEventListener("click", () => {
+		console.log("EDIT");
+		// EDIT
+		newText.contentEditable = "true";
+	});
+}
